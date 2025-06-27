@@ -7,7 +7,7 @@ import { CardComponent } from "../shared/card/card.component";
   standalone: true,
   imports: [CardComponent],
   templateUrl: './user.component.html',
-  styleUrl: './user.component.css'
+  styleUrl: './user.component.css' 
 })
 export class UserComponent {
    @Input ({required: true}) user!: User;
