@@ -1,8 +1,8 @@
-import { Injectable } from "@angular/core";
-import { NewTaskData } from "./task/task.model";
+import { Injectable } from '@angular/core';
+import { NewTaskData } from './task/task.model';
 
-@Injectable({providedIn: 'root'})
-export  class TasksService {
+@Injectable({ providedIn: 'root' })
+export class TasksService {
   private tasks = [
     {
       id: 't1',
@@ -27,43 +27,41 @@ export  class TasksService {
         'Prepare and describe an issue template which will help with project management',
       dueDate: '2024-06-15',
     },
-  ]; 
-
+  ];
 
   /**
    *
    */
   constructor() {
-   const tasks = localStorage.getItem('tasks');
+    const tasks = localStorage.getItem('tasks');
 
-   if(tasks) {
-    this.tasks = JSON.parse( tasks);
-   }
-  } 
-
+    if (tasks) {
+      this.tasks = JSON.parse(tasks);
+    }
+  }
 
   getUserTasks(userId: string) {
-   return this.tasks.filter((task) => task.userId === userId);
-  } 
+    return this.tasks.filter((task) => task.userId === userId);
+  }
 
-  addTasks(taskData: NewTaskData, userId : string) {
-      this.tasks.push({
+  addTasks(taskData: NewTaskData, userId: string) {
+    this.tasks.push({
       id: new Date().getTime().toString(),
       title: taskData.title,
       summary: taskData.summary,
       dueDate: taskData.date,
       userId: userId,
-    });  
+    });
 
-    this.saveTasks()
-  } 
+    this.saveTasks();
+  }
 
   removeTask(id: string) {
     this.tasks = this.tasks.filter((task) => task.id !== id);
     this.saveTasks();
-  } 
+  }
 
   private saveTasks() {
-    localStorage.setItem('tasks', JSON.stringify(this.tasks) );
+    localStorage.setItem('tasks', JSON.stringify(this.tasks));
   }
 }
